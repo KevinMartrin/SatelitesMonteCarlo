@@ -10,7 +10,7 @@ namespace SatelitesMonteCarlo
     {
         public Experimento () { }
 
-        public int vidaSatelite(int min, int max, Random randi)
+        public List<int> vidaSatelite(int min, int max, Random randi)
         {
             List <int> paneles = new List<int> ();
             
@@ -20,10 +20,7 @@ namespace SatelitesMonteCarlo
                 paneles.Add(aleatorio.CuadradoMedio(min, max, randi));
             }
 
-            paneles.Sort();
-            return paneles[3];
+            return paneles;
         }
-
-        public int 
     }
 }
