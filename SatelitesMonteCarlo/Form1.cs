@@ -22,6 +22,36 @@ namespace SatelitesMonteCarlo
 
         }
 
+        //----------------------------------Funciones--------------------------------
+        public void descargarExcel(DataGridView data)
+        {
+            //Paso 0: Instalar complemento de Excel
+            Microsoft.Office.Interop.Excel.Application exportarExcel = new Microsoft.Office.Interop.Excel.Application();
+            exportarExcel.Application.Workbooks.Add(true);
+            int indiceColumna = 0;
+
+            //Paso 1: Contruir columnas y los nombres de las cabeceras
+            foreach (DataGridViewColumn columna in data.Columns)
+            {
+                indiceColumna++;
+                exportarExcel.Cells[1, indiceColumna] = columna.HeaderText;
+            }
+
+            //Paso 2: Construir filas y llenar valores
+            int indiceFilas = 0;
+            foreach (DataGridViewRow fila in data.Rows)
+            {
+                indiceFilas++;
+                indiceColumna = 0;
+                foreach (DataGridViewColumn columna in data.Columns)
+                {
+                    indiceColumna++;
+                    exportarExcel.Cells[indiceFilas + 1, indiceColumna] = fila.Cells[columna.Name].Value;
+                }
+            }
+            //Paso 3: Visibilidad
+            exportarExcel.Visible = true;
+        }
 
         public void llenarGrid(List<List<int>> paneles, List<int> vidas)
         {
@@ -75,7 +105,7 @@ namespace SatelitesMonteCarlo
 
         }
 
-
+        //----------------------------------Elementos--------------------------------
         private void button1_Click(object sender, EventArgs e)
         {
             if (textBox1.Text.Equals("") || textBox2.Text.Equals("") || textBox3.Text.Equals(""))
@@ -100,6 +130,11 @@ namespace SatelitesMonteCarlo
 
             llenarGrid(todosPaneles,vidas);
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            descargarExcel(dataGridView1);
         }
     }
 }
