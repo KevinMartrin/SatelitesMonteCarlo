@@ -55,6 +55,10 @@ namespace SatelitesMonteCarlo
 
             return numerito;
         }
-
+        public int CSharpRandom(int min, int max, Random numero_aleatorio)
+        {
+            int numerito = numero_aleatorio.Next(min, max);
+            return numerito;
+        }
     }
 }

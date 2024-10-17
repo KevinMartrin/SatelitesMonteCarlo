@@ -119,7 +119,7 @@ namespace SatelitesMonteCarlo
 
             List<double> vidas = new List<double>();
             List<List<double>> todosPaneles = new List<List<double>>();
-            Random rand = new Random();
+            Random rand = new Random(Convert.ToInt32(textBox4.Text));
             for (int i = 0; i < n; i++)
             {
                 Experimento satelite = new Experimento();
