@@ -109,7 +109,7 @@ namespace SatelitesMonteCarlo
         //----------------------------------Elementos--------------------------------
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text.Equals("") || textBox2.Text.Equals("") || textBox3.Text.Equals(""))
+            if (textBox1.Text.Equals("") || textBox2.Text.Equals("") || textBox3.Text.Equals("") || textBox4.Text.Equals(""))
             {
                 MessageBox.Show("Los numeros tienen que ser mayor que 0, no vacios");
                 return;
