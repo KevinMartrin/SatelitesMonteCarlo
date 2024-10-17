@@ -10,14 +10,17 @@ namespace SatelitesMonteCarlo
     {
         public Experimento () { }
 
-        public List<int> vidaSatelite(int min, int max, Random randi)
+        public List<double> vidaSatelite(double min, double max, Random randi)
         {
-            List <int> paneles = new List<int> ();
+
+            int mini = Convert.ToInt32(min);
+            int maxi = Convert.ToInt32(max);
+            List <double> paneles = new List<double> ();
             
             for (int i = 0; i < 5; i++)
             {
                 Algoritmo aleatorio = new Algoritmo ();
-                paneles.Add(aleatorio.CuadradoMedio(min, max, randi));
+                paneles.Add(aleatorio.CuadradoMedio(mini,maxi, randi));
             }
 
             return paneles;

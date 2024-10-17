@@ -53,7 +53,7 @@ namespace SatelitesMonteCarlo
             exportarExcel.Visible = true;
         }
 
-        public void llenarGrid(List<List<int>> paneles, List<int> vidas)
+        public void llenarGrid(List<List<double>> paneles, List<double> vidas)
         {
             int n = Convert.ToInt32(textBox1.Text);
             //Paso 0: Numero de columnas
@@ -89,19 +89,20 @@ namespace SatelitesMonteCarlo
             }
 
             dataGridView1.Rows.Add();
-            dataGridView1.Rows[6].Cells[Int32.Parse(numeroColumna1) - 1].Value = "Promedio";
-            dataGridView1.Rows[6].Cells[Int32.Parse(numeroColumna7) - 1].Value = vidas.Average();
+            dataGridView1.Rows[n].Cells[Int32.Parse(numeroColumna1) - 1].Value = "Promedio";
+            dataGridView1.Rows[n].Cells[Int32.Parse(numeroColumna7) - 1].Value = vidas.Average();
 
-            int media = Convert.ToInt32(vidas.Average());
-            int desvi = 0;
-            foreach (int i in vidas)
+            double media = Convert.ToDouble(vidas.Average());
+            double desvi = 0;
+            foreach (double i in vidas)
             {
-                desvi += (i * i)/(n * (n - 1))/ (media ^ 2) / (n - 1);
+                desvi += (i * i);
             }
+            double desvia = desvi/(n * (n - 1)) - (media * media) / (n - 1);
 
             dataGridView1.Rows.Add();
-            dataGridView1.Rows[7].Cells[Int32.Parse(numeroColumna1) - 1].Value = "Sn";
-            dataGridView1.Rows[7].Cells[Int32.Parse(numeroColumna7) - 1].Value = desvi;
+            dataGridView1.Rows[n+1].Cells[Int32.Parse(numeroColumna1) - 1].Value = "Sn";
+            dataGridView1.Rows[n+1].Cells[Int32.Parse(numeroColumna7) - 1].Value = Math.Pow(desvia,0.5);
 
         }
 
@@ -116,13 +117,13 @@ namespace SatelitesMonteCarlo
 
             int n = Convert.ToInt32(textBox1.Text);
 
-            List<int> vidas = new List<int>();
-            List<List<int>> todosPaneles = new List<List<int>>();
+            List<double> vidas = new List<double>();
+            List<List<double>> todosPaneles = new List<List<double>>();
             Random rand = new Random();
             for (int i = 0; i < n; i++)
             {
                 Experimento satelite = new Experimento();
-                List<int> paneles = satelite.vidaSatelite(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), rand);
+                List<double> paneles = satelite.vidaSatelite(Convert.ToDouble(textBox2.Text), Convert.ToDouble(textBox3.Text), rand);
                 paneles.Sort();
                 vidas.Add(paneles[3]);
                 todosPaneles.Add(paneles);
